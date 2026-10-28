@@ -27,13 +27,60 @@ class Rectangle implements Shape {
 
     @Override
     public double getPerimeter() {
-        return 2 * (width + height);
+        return 2 * width + height;
     }
 }
 
-// Escreva a classe Circle aqui, implementando Shape
+class Circle extends Shape {
+    private double radius;
 
-// Escreva a classe Triangle aqui, implementando Shape
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public String getName() {
+        return "circle";
+    }
+
+    @Override
+    double getArea() {
+        return Math.PI * radius;
+    }
+
+    @Override
+    public double getPerimeter() {
+        return 2 * Math.PI * radius;
+    }
+}
+
+class Triangle implements Shape {
+    private double a;
+    private double b;
+    private double c;
+
+    public Triangle(double a, double b, double c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
+    @Override
+    public String getName() {
+        return "triangle";
+    }
+
+    @Override
+    public double getArea() {
+        double s = getPerimeter() / 2;
+        return Math.sqrt(s * (s - a) * (s - b) * (s - c));
+    }
+
+    @Override
+    public double getPerimetre() {
+        return a + b + c;
+    }
+}
 
 public class Solution01 {
     public static void main(String[] args) {
@@ -64,5 +111,14 @@ public class Solution01 {
         printReport(shapes);
     }
 
-    // Escreva o método printReport aqui
+    public static void printReport(Shape[] shapes) {
+        Shape largest = null;
+        for (Shape shape : shapes) {
+            System.out.printf("%s: area %.2f perimeter %.2f%n", shape.getName(), shape.getArea(), shape.getPerimeter());
+            if (largest == null || shape.getArea() >= largest.getArea()) {
+                largest = shape;
+            }
+        }
+        System.out.printf("largest area: %s", largest.getName());
+    }
 }
