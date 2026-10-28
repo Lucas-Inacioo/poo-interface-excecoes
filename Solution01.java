@@ -119,6 +119,6 @@ public class Solution01 {
                 largest = shape;
             }
         }
-        System.out.printf("largest area: %s", largest.getName());
+        System.out.printf("largest area: %s%n", largest.getName());
     }
 }
