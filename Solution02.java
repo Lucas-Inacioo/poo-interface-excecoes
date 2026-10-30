@@ -1,12 +1,17 @@
 import java.util.*;
 
-// Escreva a classe InsufficientFundsException aqui, herdando de Exception
+// Contrato do banco, não altere esta interface
+interface Bank {
+    Account find(String id) throws AccountNotFoundException;
 
-// Escreva a classe AccountNotFoundException aqui, herdando de Exception
+    void deposit(String id, double amount) throws AccountNotFoundException;
 
-// Escreva a classe Account aqui
+    void withdraw(String id, double amount) throws AccountNotFoundException, InsufficientFundsException;
 
-// Escreva a classe Bank aqui
+    void transfer(String fromId, String toId, double amount) throws AccountNotFoundException, InsufficientFundsException;
+}
+
+// Escreva aqui as classes InsufficientFundsException, AccountNotFoundException, Account e SimpleBank
 
 public class Solution02 {
     public static void main(String[] args) {
@@ -29,8 +34,9 @@ public class Solution02 {
         }
         scanner.close();
 
-        Bank bank = new Bank(accounts);
-        bank.process(operations);
+        Bank bank = new SimpleBank(accounts);
+
+        // Processe as operações aqui, na ordem da entrada, com uma linha de saída para cada uma
 
         for (Account account : accounts) {
             System.out.printf("final balance %s: %.2f%n", account.getId(), account.getBalance());
