@@ -106,7 +106,7 @@ public class Solution01 {
             double width = Double.parseDouble(parts[1]);
             double height = Double.parseDouble(parts[2]);
             return new Rectangle(width, height);
-        } else if (parts[0].equals("CIRCLE")) {
+        } else if (parts[0] == "CIRCLE") {
             double radius = Double.parseDouble(parts[1]);
             return new Circle(radius);
         } else {
