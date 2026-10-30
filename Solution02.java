@@ -4,7 +4,7 @@ import java.util.*;
 
 // Escreva a classe Account aqui
 
-// Escreva a classe Bank aqui, com o método process
+// Escreva a classe Bank aqui, com os métodos process e requiredBalance
 
 public class Solution02 {
     public static void main(String[] args) {
@@ -25,5 +25,6 @@ public class Solution02 {
         Account account = new Account(initialBalance);
         Bank.process(account, types, amounts);
         System.out.printf("final balance: %.2f%n", account.getBalance());
+        System.out.printf("required initial balance: %.2f%n", Bank.requiredBalance(types, amounts));
     }
 }

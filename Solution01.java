@@ -87,28 +87,34 @@ public class Solution01 {
         // Garante o ponto como separador decimal, qualquer que seja o idioma do computador
         Locale.setDefault(Locale.US);
         Scanner scanner = new Scanner(System.in);
-        int n = Integer.parseInt(scanner.next());
+        int n = Integer.parseInt(scanner.nextLine());
         Shape[] shapes = new Shape[n];
+        int count = 0;
 
         for (int i = 0; i < n; i++) {
-            String type = scanner.next();
-            if (type.equals("RECTANGLE")) {
-                double width = Double.parseDouble(scanner.next());
-                double height = Double.parseDouble(scanner.next());
-                shapes[i] = new Rectangle(width, height);
-            } else if (type.equals("CIRCLE")) {
-                double radius = Double.parseDouble(scanner.next());
-                shapes[i] = new Circle(radius);
-            } else {
-                double a = Double.parseDouble(scanner.next());
-                double b = Double.parseDouble(scanner.next());
-                double c = Double.parseDouble(scanner.next());
-                shapes[i] = new Triangle(a, b, c);
-            }
+            shapes[count] = parseShape(scanner.nextLine());
+            count++;
         }
         scanner.close();
 
-        printReport(shapes);
+        printReport(Arrays.copyOf(shapes, count));
+    }
+
+    public static Shape parseShape(String line) {
+        String[] parts = line.split(" ");
+        if (parts[0].equals("RECTANGLE")) {
+            double width = Double.parseDouble(parts[1]);
+            double height = Double.parseDouble(parts[2]);
+            return new Rectangle(width, height);
+        } else if (parts[0].equals("CIRCLE")) {
+            double radius = Double.parseDouble(parts[1]);
+            return new Circle(radius);
+        } else {
+            double a = Double.parseDouble(parts[1]);
+            double b = Double.parseDouble(parts[2]);
+            double c = Double.parseDouble(parts[3]);
+            return new Triangle(a, b, c);
+        }
     }
 
     public static void printReport(Shape[] shapes) {
